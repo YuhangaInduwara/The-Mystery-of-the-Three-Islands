@@ -105,8 +105,8 @@ Material:
     - _MediumTilingDistance: 100
     - _Metallic: 0
     - _Mode: 0
-    - _NormalStrength: 0.75
-    - _NormalTiling: 0.1
+    - _NormalStrength: 1.46
+    - _NormalTiling: 0.22
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ProbeReflectionIntensity: 0
@@ -124,12 +124,12 @@ Material:
     - _UnderwaterMode: 0
     - _UnderwaterTranspDist: 13.56
     - _UnderwaterTranspFalloff: 0.78
-    - _WaveSpeed: 0.05
+    - _WaveSpeed: 0.1
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DeepWaterColor: {r: 0.2392157, g: 0.48627454, b: 0.79215693, a: 1}
+    - _DeepWaterColor: {r: 0.12200062, g: 0.31871423, b: 0.5622641, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _FogColor: {r: 1, g: 1, b: 1, a: 1}

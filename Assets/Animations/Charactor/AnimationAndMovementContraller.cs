@@ -15,12 +15,18 @@ public class AnimationAndMovementContraller : MonoBehaviour
     bool isRunPressed;
 
     float rotationFactorPerFrame = 5.0f;
-    float RunSpeed = 3.0f;
+    public float RunSpeed = 3.0f;
 
+
+    
 
     CharacterController characterController;
 
     Animator animator;
+
+    //Audio
+    public AudioSource src;
+    public AudioClip Walking, Running;
 
     // Start is called before the first frame update
     void Awake()
@@ -68,10 +74,13 @@ public class AnimationAndMovementContraller : MonoBehaviour
 
         isMovemetPressed = currentMovemetInput.x != 0 || currentMovemetInput.y != 0;
 
+        walkingAudio();
+
     }
 
     void onRun(InputAction.CallbackContext context) {
         isRunPressed = context.ReadValueAsButton();
+        runingAudio();
     }
 
     void handleAnimation()
@@ -121,6 +130,7 @@ public class AnimationAndMovementContraller : MonoBehaviour
     {
         handleRotaion();
         handleAnimation();
+        handleGravity();
         if (isRunPressed)
         {
             characterController.Move(currentRunMovemet * Time.deltaTime);
@@ -138,4 +148,17 @@ public class AnimationAndMovementContraller : MonoBehaviour
     {
         playerInput.CharactorControll.Disable();
     }
+
+    public void runingAudio()
+    {
+        src.clip = Running;
+        src.Play();
+    }
+    public void walkingAudio()
+    {
+        src.clip = Walking;
+        src.Play();
+    }
+
+    
 }
