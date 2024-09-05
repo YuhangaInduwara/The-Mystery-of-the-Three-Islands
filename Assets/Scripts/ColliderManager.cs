@@ -8,11 +8,11 @@ public class CollisionReset : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-       
+       Debug.LogWarning("Hello1");
         // Check if the player and cube are the colliding objects
         if ((collision.gameObject == player || collision.gameObject == cube) && collision.gameObject != this.gameObject)
         {
-               
+               Debug.LogWarning("Hello2");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
           
         }
