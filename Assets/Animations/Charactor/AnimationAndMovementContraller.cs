@@ -130,6 +130,7 @@ public class AnimationAndMovementContraller : MonoBehaviour
     {
         handleRotaion();
         handleAnimation();
+        handleGravity();
         if (isRunPressed)
         {
             characterController.Move(currentRunMovemet * Time.deltaTime);
