@@ -44,6 +44,15 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""ff6b3423-deab-42e0-9513-8df490078cee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -103,6 +112,61 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""c35cec0d-6340-4759-bedd-6b2ffef5decd"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""dce805be-1336-4086-8228-f579a1605000"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""71b6c9df-39f1-4c6f-b22c-6c88134a3575"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""b067bac7-4edc-4696-b531-7d7165f306b3"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""f887abcc-2ee6-4915-8c91-5e7c61348cf9"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""e68fe28f-cbea-4fca-86d2-fe445252b9f5"",
                     ""path"": ""<Keyboard>/leftShift"",
@@ -110,6 +174,17 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82b433de-1f5b-4b51-aea8-d0b583779466"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -122,6 +197,7 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
         m_CharactorControll = asset.FindActionMap("CharactorControll", throwIfNotFound: true);
         m_CharactorControll_Move = m_CharactorControll.FindAction("Move", throwIfNotFound: true);
         m_CharactorControll_Run = m_CharactorControll.FindAction("Run", throwIfNotFound: true);
+        m_CharactorControll_Jump = m_CharactorControll.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,12 +261,14 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
     private List<ICharactorControllActions> m_CharactorControllActionsCallbackInterfaces = new List<ICharactorControllActions>();
     private readonly InputAction m_CharactorControll_Move;
     private readonly InputAction m_CharactorControll_Run;
+    private readonly InputAction m_CharactorControll_Jump;
     public struct CharactorControllActions
     {
         private @CharactorMovements m_Wrapper;
         public CharactorControllActions(@CharactorMovements wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_CharactorControll_Move;
         public InputAction @Run => m_Wrapper.m_CharactorControll_Run;
+        public InputAction @Jump => m_Wrapper.m_CharactorControll_Jump;
         public InputActionMap Get() { return m_Wrapper.m_CharactorControll; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -206,6 +284,9 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(ICharactorControllActions instance)
@@ -216,6 +297,9 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(ICharactorControllActions instance)
@@ -237,5 +321,6 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
