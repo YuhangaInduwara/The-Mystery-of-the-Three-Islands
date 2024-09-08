@@ -1,101 +1,114 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    public GameObject pauseMenuUI; // Reference to the pause menu GameObject
-    public GameObject compass; // Reference to the pause menu GameObject
-    public GameObject healthBar; // Reference to the pause menu GameObject
-    private bool isPaused = false; // To check if the game is currently paused
+    public GameObject pauseMenuUI; 
+    public GameObject compass;
+    public GameObject healthBar;
+    private bool isPaused = false;
     public TMP_Text buttonText;
-    public AudioManager audioManager; // Public reference to the AudioManager script
+    public AudioManager audioManager;
+    
+    public Button resumeButton; 
+    public Button muteButton;
+    public Button quitButton;
+    private EventSystem eventSystem;
 
     private void Start()
     {
-        if (audioManager == null)
+        eventSystem = EventSystem.current;
+
+        if (eventSystem == null)
         {
-            Debug.LogError("AudioManager not assigned in the Inspector.");
+            Debug.LogError("EventSystem is missing from the scene.");
         }
 
+        // Default mute state setup
         if (MenuManager.isMuted)
         {
-            Debug.Log("Audio is muted");
-            buttonText.text = "Unmute"; // Change button text to "Unmute"
+            buttonText.text = "Unmute";
         }
         else
         {
-            Debug.Log("Audio is unmuted");
-            buttonText.text = "Mute"; // Change button text to "Mute"
+            buttonText.text = "Mute";
         }
     }
 
     void Update()
     {
-        // Check if the ESC key is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
             {
-                Resume(); // If the game is paused, resume the game
+                Resume();
             }
             else
             {
-                Pause(); // If the game is not paused, pause the game
+                Pause();
             }
         }
     }
 
     // Method to resume the game
-    void Resume()
+    public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        healthBar.SetActive(true); // Show the pause menu
-        compass.SetActive(true); // Hide the pause menu
-        Time.timeScale = 1f; // Resume game time
-        isPaused = false; // Update pause state
+        healthBar.SetActive(true);
+        compass.SetActive(true);
+        Time.timeScale = 1f; 
+        isPaused = false; 
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
         if (audioManager != null)
         {
-            audioManager.ResumeMusic(); // Resume the music
-        }
-        else
-        {
-            Debug.LogWarning("AudioManager reference is missing during Resume call.");
+            audioManager.ResumeMusic(); 
         }
     }
 
     // Method to pause the game
-    void Pause()
+    public void Pause()
     {
-        pauseMenuUI.SetActive(true); // Show the pause menu
-        healthBar.SetActive(false); // Show the pause menu
-        compass.SetActive(false); // Show the pause menu
-        Time.timeScale = 0f; // Freeze game time
-        isPaused = true; // Update pause state
+        pauseMenuUI.SetActive(true);
+        healthBar.SetActive(false);
+        compass.SetActive(false);
+        Time.timeScale = 0f; 
+        isPaused = true; 
+
+        Cursor.visible = true;  // Make sure the cursor is visible when the menu is active
+        Cursor.lockState = CursorLockMode.None;
+
+        // Select the Resume button so keyboard navigation starts from there
+        eventSystem.SetSelectedGameObject(resumeButton.gameObject);
 
         if (audioManager != null)
         {
-            audioManager.PauseMusic(); // Pause the music
-        }
-        else
-        {
-            Debug.LogWarning("AudioManager reference is missing during Pause call.");
+            audioManager.PauseMusic();
         }
     }
 
-    void Mute()
+    // Method to mute/unmute the game
+    public void Mute()
     {
-        MenuManager.isMuted = !MenuManager.isMuted; // Toggle mute state
-        if (MenuManager.isMuted)
-        {
-            Debug.Log("Audio is muted");
-            buttonText.text = "Unmute"; // Change button text to "Unmute"
-        }
-        else
-        {
-            Debug.Log("Audio is unmuted");
-            buttonText.text = "Mute"; // Change button text to "Mute"
-        }
+        MenuManager.isMuted = !MenuManager.isMuted;
+        buttonText.text = MenuManager.isMuted ? "Unmute" : "Mute";
+    }
+
+    // Method to quit the game
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    // Function to handle button click that hides the cursor
+    public void OnButtonClicked()
+    {
+        Cursor.visible = false;  // Hide the cursor when an option is selected
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
