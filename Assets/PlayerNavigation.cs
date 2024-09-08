@@ -43,8 +43,17 @@ public class PlayerNavigation : MonoBehaviour
             // Calculate the distance from the PlayerArmature to the current target
             float distanceToTarget = Vector3.Distance(playerArmature.position, targetLocations[currentTargetIndex].position);
 
-            // Update the distance on the TextMeshPro UI
-            distanceText.text = "Distance to next target: " + (distanceToTarget * 3.28084f).ToString("F2") + " feet";  // Convert to feet
+            // If it's the last target, show a short, mysterious message
+            if (currentTargetIndex == targetLocations.Length - 1)
+            {
+                // Short and mysterious message for the last target
+                distanceText.text = "The mountain top holds the answer to your quest!";
+            }
+            else
+            {
+                // Update the distance on the TextMeshPro UI with a general message
+                distanceText.text = "You are " + (distanceToTarget * 3.28084f).ToString("F2") + " feet away from the next clue.";
+            }
 
             // If the player is close enough to the target location, stop movement and show the message
             if (distanceToTarget <= stopDistance)
