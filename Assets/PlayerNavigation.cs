@@ -13,7 +13,7 @@ public class PlayerNavigation : MonoBehaviour
     public GameObject messagePanel;  // The UI panel to show the quote
     public Button okButton;  // The OK button to proceed
     public string[] locationQuotes;  // Array of unique quotes for each location
-    public float stopDistance = 1.0f;  // Minimum distance to stop
+    public float stopDistance = 0.2f;  // Minimum distance to stop
     private EventSystem eventSystem;
 
     private bool canMove = true;  // Flag to control player movement
@@ -26,7 +26,7 @@ public class PlayerNavigation : MonoBehaviour
             Debug.LogError("EventSystem is missing from the scene.");
         }
         // Add listener for OK button to move to the next target when clicked
-        okButton.onClick.AddListener(OnOkButtonClicked);
+        // okButton.onClick.AddListener(OnOkButtonClicked);
 
         // Initially hide the message panel
         messagePanel.SetActive(false);
@@ -68,25 +68,6 @@ public class PlayerNavigation : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        // Detect collision with the target location
-        if (other.CompareTag("TargetLocation"))  // Assuming you have tagged your target objects with "TargetLocation"
-        {
-            // Print the name of the object the player collided with
-            Debug.Log("Player collided with: " + other.gameObject.name);
-
-            // Make the target object disappear
-            Destroy(other.gameObject);
-
-            // Show the message panel with the quote for the current target
-            ShowMessage();
-        }
-        else
-        {
-            Debug.Log("Collided with non-target object: " + other.gameObject.name);
-        }
-    }
 
     public void ShowMessage()
     {
