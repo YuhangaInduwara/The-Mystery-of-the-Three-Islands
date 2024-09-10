@@ -43,8 +43,7 @@ public class AnimationAndMovementContraller : MonoBehaviour
         playerInput.CharactorControll.Move.performed  += onMovementInput;
         playerInput.CharactorControll.Run.started += onRun;
         playerInput.CharactorControll.Run.canceled += onRun;
-
-
+      
     }
 
     void handleRotaion()
