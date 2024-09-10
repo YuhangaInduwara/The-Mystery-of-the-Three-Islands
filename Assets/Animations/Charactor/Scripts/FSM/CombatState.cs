@@ -60,6 +60,15 @@ public class CombatState : State
 
         character.animator.SetFloat("speed", input.magnitude, character.speedDampTime, Time.deltaTime);
 
+        float speed = character.animator.GetFloat("speed");
+        float threshold = 0.01f; // You can adjust this threshold if necessary
+
+        // If the speed is below the threshold, set it to 0
+        if (speed < threshold)
+        {
+            character.animator.SetFloat("speed", 0f);
+        }
+
         if (sheathWeapon)
         {
             character.animator.SetTrigger("sheathWeapon");
