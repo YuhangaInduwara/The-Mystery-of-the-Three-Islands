@@ -18,6 +18,8 @@ public class PlayerNavigation : MonoBehaviour
 
     private bool canMove = true;  // Flag to control player movement
 
+    //test comment
+    
     private void Start()
     {
         eventSystem = EventSystem.current;
