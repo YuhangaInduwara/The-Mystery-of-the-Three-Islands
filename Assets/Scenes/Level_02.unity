@@ -2290,11 +2290,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1196466267951516, guid: 77869ebfddd0f8047b4860ea9e5f241e, type: 3}
   m_PrefabInstance: {fileID: 1550206269}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &825766743 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4332779481300058, guid: 77869ebfddd0f8047b4860ea9e5f241e, type: 3}
-  m_PrefabInstance: {fileID: 1550206269}
-  m_PrefabAsset: {fileID: 0}
 --- !u!65 &825766744
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2480,11 +2475,6 @@ BoxCollider:
 --- !u!1 &957951986 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1196466267951516, guid: 77869ebfddd0f8047b4860ea9e5f241e, type: 3}
-  m_PrefabInstance: {fileID: 1560319756}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &957951989 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4332779481300058, guid: 77869ebfddd0f8047b4860ea9e5f241e, type: 3}
   m_PrefabInstance: {fileID: 1560319756}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &957951990
@@ -5484,8 +5474,8 @@ MonoBehaviour:
   - {fileID: 955965825}
   - {fileID: 1219021231}
   - {fileID: 420913915}
-  - {fileID: 957951989}
-  - {fileID: 825766743}
+  - {fileID: 631398125}
+  - {fileID: 714709433}
   distanceText: {fileID: 707696838}
   quoteText: {fileID: 972207512}
   messagePanel: {fileID: 1758220419}
@@ -6842,11 +6832,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 533190104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1956541682 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4332779481300058, guid: 77869ebfddd0f8047b4860ea9e5f241e, type: 3}
-  m_PrefabInstance: {fileID: 385167463}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1974805791
 GameObject:
   m_ObjectHideFlags: 0

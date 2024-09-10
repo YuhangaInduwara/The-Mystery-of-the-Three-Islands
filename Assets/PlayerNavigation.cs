@@ -44,7 +44,7 @@ public class PlayerNavigation : MonoBehaviour
             float distanceToTarget = Vector3.Distance(playerArmature.position, targetLocations[currentTargetIndex].position);
 
             // If it's the last target, show a short, mysterious message
-            if (currentTargetIndex == targetLocations.Length - 1)
+            if (currentTargetIndex == targetLocations.Length )
             {
                 // Short and mysterious message for the last target
                 distanceText.text = "The mountain top holds the answer to your quest!";
@@ -91,7 +91,7 @@ public class PlayerNavigation : MonoBehaviour
         messagePanel.SetActive(false);
 
         // Move to the next target location
-        if (currentTargetIndex < targetLocations.Length - 1)  // Prevent going out of bounds
+        if (currentTargetIndex < targetLocations.Length )  // Prevent going out of bounds
         {
             currentTargetIndex++;
             Debug.Log("Moved to next target: " + currentTargetIndex);
