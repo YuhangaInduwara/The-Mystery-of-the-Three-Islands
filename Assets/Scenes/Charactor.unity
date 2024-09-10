@@ -2199,8 +2199,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   src: {fileID: 2006274188}
   walk: {fileID: 8300000, guid: 159b9776e5a075a49a62ab9679fe4302, type: 3}
-  sfx2: {fileID: 8300000, guid: f9093845af82315409c60dcaa2027dcd, type: 3}
-  sfx3: {fileID: 0}
+  run: {fileID: 8300000, guid: cef0fd0a1693ac246bc3c6f808b78b84, type: 3}
+  jump: {fileID: 8300000, guid: d261d5fc8420f024fbd7b0e1d950d3ae, type: 3}
+  sword: {fileID: 8300000, guid: 180f35aef2ea2654086bcbb52d58ec0b, type: 3}
+  shealth: {fileID: 8300000, guid: 7d176df610ca34c4c878590f3dc014a1, type: 3}
 --- !u!82 &2006274188 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 3924396287061887215, guid: 588f6a4a191e3c14fb9f27ecde0c3c68, type: 3}
