@@ -14,8 +14,10 @@ public class RotationManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+       
         if (other.gameObject == player)
         {
+             Debug.LogWarning("Entering");
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currentSceneIndex + 1);
         }
