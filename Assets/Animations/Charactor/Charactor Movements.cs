@@ -53,6 +53,24 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DrawWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1b9b864-98d7-40c0-a2af-3a863302bf55"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""639c2e81-c68e-4f55-b975-c70bcffd50ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +205,28 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1565906d-c192-498a-9d4d-625c14b53106"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DrawWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c031f536-859e-453b-9c29-4eb731ab173c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +238,8 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
         m_CharactorControll_Move = m_CharactorControll.FindAction("Move", throwIfNotFound: true);
         m_CharactorControll_Run = m_CharactorControll.FindAction("Run", throwIfNotFound: true);
         m_CharactorControll_Jump = m_CharactorControll.FindAction("Jump", throwIfNotFound: true);
+        m_CharactorControll_DrawWeapon = m_CharactorControll.FindAction("DrawWeapon", throwIfNotFound: true);
+        m_CharactorControll_Attack = m_CharactorControll.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,6 +304,8 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharactorControll_Move;
     private readonly InputAction m_CharactorControll_Run;
     private readonly InputAction m_CharactorControll_Jump;
+    private readonly InputAction m_CharactorControll_DrawWeapon;
+    private readonly InputAction m_CharactorControll_Attack;
     public struct CharactorControllActions
     {
         private @CharactorMovements m_Wrapper;
@@ -269,6 +313,8 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_CharactorControll_Move;
         public InputAction @Run => m_Wrapper.m_CharactorControll_Run;
         public InputAction @Jump => m_Wrapper.m_CharactorControll_Jump;
+        public InputAction @DrawWeapon => m_Wrapper.m_CharactorControll_DrawWeapon;
+        public InputAction @Attack => m_Wrapper.m_CharactorControll_Attack;
         public InputActionMap Get() { return m_Wrapper.m_CharactorControll; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -287,6 +333,12 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @DrawWeapon.started += instance.OnDrawWeapon;
+            @DrawWeapon.performed += instance.OnDrawWeapon;
+            @DrawWeapon.canceled += instance.OnDrawWeapon;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         private void UnregisterCallbacks(ICharactorControllActions instance)
@@ -300,6 +352,12 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @DrawWeapon.started -= instance.OnDrawWeapon;
+            @DrawWeapon.performed -= instance.OnDrawWeapon;
+            @DrawWeapon.canceled -= instance.OnDrawWeapon;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         public void RemoveCallbacks(ICharactorControllActions instance)
@@ -322,5 +380,7 @@ public partial class @CharactorMovements: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnDrawWeapon(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }
