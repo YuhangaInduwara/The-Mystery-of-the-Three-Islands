@@ -14,7 +14,7 @@ Welcome to **The Mystery of the Three Islands**, a thrilling pirate adventure fe
 3. Each level increases in difficulty as you get closer to the legendary pirate loot!
 
 ## Download Link
-Download the game here: [Play Now](your_download_link_here)
+Download the game here: [Play Now](https://t.me/thelonemutegameryt/5)
 
 ## Watch the Gameplay
 Check out our full gameplay video on YouTube: [Watch the Adventure](https://www.youtube.com/watch?v=uCLvXfPOBj0)
